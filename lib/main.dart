@@ -2,15 +2,18 @@
 import 'package:flutter/material.dart';
 import 'pages/home.dart';
 import 'pages/loading.dart';
-import 'pages/location.dart';
+import 'pages/patlogin.dart';
+import 'pages/doclogin.dart';
+
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: '/home',
+    initialRoute: '/',
       routes:{
       '/' : (context) => loading(),
         '/home' : (context) => Home(),
-        '/location' : (context) => location(),
+        '/login' : (context) => plogin(),
+        '/dlogin' : (context) => dlogin(),
       },
   ));
 }
