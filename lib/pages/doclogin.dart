@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutterapp/sevices/auth.dart';
 class dlogin extends StatefulWidget {
   @override
   _dloginState createState() => _dloginState();
 }
 
 class _dloginState extends State<dlogin> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +23,10 @@ class Logform extends StatefulWidget {
 }
 
 class _LogformState extends State<Logform> {
+  final Authservice _auth = Authservice();
   final formkey = GlobalKey<FormState>();
+  String email='';
+  String password='';
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -39,6 +43,9 @@ class _LogformState extends State<Logform> {
                     border: OutlineInputBorder(),
                     labelText: 'E-mail',
                   ),
+                  onChanged: (val){
+                    setState(() => email = val);
+                  },
                   validator: (value) {
                     if(value.isEmpty)
                     {
@@ -49,10 +56,14 @@ class _LogformState extends State<Logform> {
               ),
               SizedBox(height: 20,),
               TextFormField(
+                obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Password',
                   ),
+                  onChanged: (val){
+                    setState(() => password = val);
+                  },
                   validator: (value) {
                     if(value.isEmpty)
                     {
@@ -66,7 +77,18 @@ class _LogformState extends State<Logform> {
                 width: double.infinity,
                 child: FlatButton(
                   padding: EdgeInsets.all(20.0),
-                  onPressed: () {},
+                  onPressed: () async  {
+                    /*dynamic result = await _auth.Signinanon();
+                    if(result==null){
+                     print('error');
+                    }
+                    else {
+                      print(result);
+                    }
+                    Navigator.pushNamed(context, '/');*/
+                    print(email);
+                    print(password);
+                  },
                   color: Colors.black,
                   child: Text('Log in', style: TextStyle(
                     color : Colors.white,

@@ -1,24 +1,37 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterapp/pages/authenticate.dart';
+import 'package:flutterapp/pages/wrapper.dart';
+import 'package:flutterapp/sevices/auth.dart';
 import 'pages/home.dart';
 import 'pages/loading.dart';
 import 'pages/patlogin.dart';
 import 'pages/doclogin.dart';
-
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MaterialApp(
-    initialRoute: '/',
-      routes:{
-      '/' : (context) => loading(),
-        '/home' : (context) => Home(),
-        '/login' : (context) => plogin(),
-        '/dlogin' : (context) => dlogin(),
-      },
-  ));
+  runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamProvider<FirebaseUser>.value(
+      value:Authservice().user,
+      child: MaterialApp(
+        initialRoute: '/',
+        routes:{
+          '/' : (context) => Wrapper(),
+          '/home' : (context) => Home(),
+          '/login' : (context) => Authenticate(),
+          '/dlogin' : (context) => dlogin(),
+        },
+      ),
+    );
+  }
 }
 
-class Home1 extends StatefulWidget {
+/*class Home1 extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
@@ -58,3 +71,5 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+ */

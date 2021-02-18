@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "328680495551",
+    "project_id": "schizapp",
+    "storage_bucket": "schizapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328680495551:android:37f43bab26cec11632690a",
+        "android_client_info": {
+          "package_name": "com.example.flutterapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "328680495551-43kn81hcdbhsfgrs6iekb3hb48t8npkt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDouY5teEjLdThGcp3moX2FjHzOUiqCGQo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "328680495551-43kn81hcdbhsfgrs6iekb3hb48t8npkt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

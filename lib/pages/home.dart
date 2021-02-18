@@ -1,11 +1,10 @@
 
 import 'package:flutter/material.dart';
-
-
-
-
+import 'package:flutterapp/sevices/auth.dart';
 
 class Home extends StatefulWidget {
+  final Function toggle;
+  Home({this.toggle});
   @override
   _HomeState createState() => _HomeState();
 }
@@ -22,6 +21,15 @@ class _HomeState extends State<Home> {
         ),
         centerTitle: true,
         backgroundColor: Colors.black,
+        actions: [
+          FlatButton.icon(onPressed: (){
+            widget.toggle();
+          }, icon: Icon(Icons.person,color: Colors.white,), label: Text('Sign In',style: TextStyle(
+            color: Colors.white
+          ),
+          ),
+          ),
+        ],
       ),
         body : MyForm(),
     );
@@ -31,11 +39,16 @@ class MyForm extends StatefulWidget {
   @override
   _MyFormState createState() => _MyFormState();
 }
-
+enum lang{tamil,english,both}
 enum gender {male , female}
 class _MyFormState extends State<MyForm> {
   gender g = gender.male;
+  lang l = lang.tamil;
+  String email='';
+  String password='';
+  String error='';
   final formKey = GlobalKey<FormState>();
+  final Authservice _auth = Authservice();
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -68,6 +81,9 @@ class _MyFormState extends State<MyForm> {
 
                   labelText: 'Email',
                 ),
+                onChanged: (val){
+                  setState(() => email = val);
+                },
                 validator: (value) {
                   if(value.isEmpty)
                   {
@@ -84,10 +100,13 @@ class _MyFormState extends State<MyForm> {
 
                   labelText: 'Password',
                 ),
+                onChanged: (val){
+                  setState(() => password = val);
+                },
                 validator: (value) {
-                  if(value.isEmpty)
+                  if(value.length<6)
                   {
-                    return "enter a valid password";
+                    return "Password length must be greater than 6";
                   }
                   return null;
                 },
@@ -117,16 +136,51 @@ class _MyFormState extends State<MyForm> {
                      ),
                    ],
                  ),
+              SizedBox(height: 20,),
+              Text('  Languages preferred :' , style: TextStyle(
+                fontSize: 20.0,
+                color:Colors.black,
+              ),
+              ),
+              SizedBox(height: 20,),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Radio(value: lang.tamil, groupValue: l, onChanged: null,),
+                    const Text('Tamil', style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.black,
+                    ),),
+                    SizedBox(width: 20,),
+                    Radio(value: lang.english, groupValue: l, onChanged: null,),
+                    const Text('English' , style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.black,
+                    ),
+                    ),
+                    SizedBox(width: 20,),
+                    Radio(value: lang.both, groupValue: l, onChanged: null,),
+                    const Text('Both' , style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.black,
+                    ),
+                    ),
+                  ],
+              ),
 
               SizedBox(height: 20,),
               SizedBox(
                 width: double.infinity,
-                child: FlatButton(onPressed: () {
-                  if (formKey.currentState.validate()) {
-                    // If the form is valid, display a Snackbar.
-                    Scaffold.of(context)
-                        .showSnackBar(SnackBar(content: Text(  ' Data is in processing.')));
-                  }
+                child: FlatButton(onPressed: () async {
+                  if(formKey.currentState.validate())
+                    {
+                      dynamic result = await _auth.Regwithemail(email, password);
+                      if(result==null)
+                        {
+                          print('error');
+                        }
+                      Navigator.pushNamed(context, '/');
+                    }
                 },
                   padding: EdgeInsets.all(20.0),
                   color: Colors.black,
