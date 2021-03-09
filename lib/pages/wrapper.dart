@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/pages/authenticate.dart';
+import 'package:flutterapp/pages/docHome.dart';
 import 'package:flutterapp/pages/home.dart';
 import 'package:flutterapp/pages/loading.dart';
 import 'package:flutterapp/pages/patHome.dart';
@@ -17,7 +18,10 @@ class Wrapper extends StatelessWidget {
         return loading();
       }
     else {
-      return pHome();
+      if(user.email=="mdmurshidh1@gmail.com")
+        return dhome();
+      else
+        return pHome();
     }
   }
 }

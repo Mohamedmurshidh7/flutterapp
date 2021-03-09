@@ -18,6 +18,7 @@ class _loadingState extends State<loading> {
                fontSize: 20.0,
              ),
              ),
+
              SizedBox(height: 10.0,),
              Row(
                mainAxisAlignment: MainAxisAlignment.center,

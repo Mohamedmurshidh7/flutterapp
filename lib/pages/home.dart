@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutterapp/sevices/auth.dart';
 
@@ -47,6 +46,7 @@ class _MyFormState extends State<MyForm> {
   String email='';
   String password='';
   String error='';
+  String name = '';
   final formKey = GlobalKey<FormState>();
   final Authservice _auth = Authservice();
   @override
@@ -66,6 +66,9 @@ class _MyFormState extends State<MyForm> {
 
                   labelText: 'Name',
                 ),
+                  onChanged: (val){
+                    setState(() => name = val);
+                  },
                 validator: (value) {
                   if(value.isEmpty)
                     {
@@ -122,7 +125,11 @@ class _MyFormState extends State<MyForm> {
                        color: Colors.black,
                      ),
                      ),
-                     Radio(value: gender.male, groupValue: g, onChanged: null,),
+                     Radio(
+                         value: gender.male,
+                         groupValue: g,
+                         onChanged: null,
+                     ),
                      const Text('Male', style: TextStyle(
                        fontSize: 20.0,
                        color: Colors.black,
@@ -174,7 +181,7 @@ class _MyFormState extends State<MyForm> {
                 child: FlatButton(onPressed: () async {
                   if(formKey.currentState.validate())
                     {
-                      dynamic result = await _auth.Regwithemail(email, password);
+                      dynamic result = await _auth.Regwithemail(name,email,password);
                       if(result==null)
                         {
                           print('error');

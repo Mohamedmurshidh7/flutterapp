@@ -71,7 +71,9 @@ class _ploginState extends State<plogin> {
                           {
                             print('error');
                           }
-                          Navigator.pushNamed(context, '/');
+                          else {
+                            Navigator.pushNamed(context, '/');
+                          }
                         }
                       },
                       color: Colors.black,

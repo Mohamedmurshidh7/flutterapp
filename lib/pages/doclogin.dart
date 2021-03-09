@@ -30,6 +30,7 @@ class _LogformState extends State<Logform> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: formkey,
         child : SingleChildScrollView(
           child: Column(
             children: [
@@ -86,8 +87,18 @@ class _LogformState extends State<Logform> {
                       print(result);
                     }
                     Navigator.pushNamed(context, '/');*/
-                    print(email);
-                    print(password);
+                    if(formkey.currentState.validate()) {
+                      dynamic result = await _auth.signInwithEmail(email, password);
+                      if(result==null)
+                        {
+                          print('error');
+                        }
+                      else
+                        {
+                          print(result);
+                          Navigator.pushNamed(context, '/');
+                        }
+                    }
                   },
                   color: Colors.black,
                   child: Text('Log in', style: TextStyle(
