@@ -7,17 +7,28 @@ class DatabaseService
 
   DatabaseService({this.uid});
 
-  Future updateUser(String Name ,String email ,String pwd ) async {
+  Future updateUser(String Name ,String email ,String pwd) async {
       return await  ptable.document(uid).setData({
+        'uid':uid,
         'name':Name,
         'email' : email,
         'password' : pwd,
+        'showTherapy': false
       });
+  }
+  Future<QuerySnapshot> getDoc()
+  {
+    return ptable.where('uid',isEqualTo: uid).getDocuments();
+  }
+  Stream<QuerySnapshot> get userdet
+  {
+    return   ptable.where('uid',isEqualTo: uid).snapshots();
   }
   List<Patient> patlistfromsnap(QuerySnapshot snapshot)
   {
     return snapshot.documents.map((doc){
       return Patient(
+        uid: doc.data['uid']??'',
         name: doc.data['name']??'',
         email : doc.data['email']??'',
         password : doc.data['password']??''
@@ -28,5 +39,18 @@ class DatabaseService
   Stream<List<Patient>> get pat
   {
     return ptable.snapshots().map(patlistfromsnap);
+  }
+  Future updateDoc(bool showT) async {
+    return await  ptable.document(uid).updateData({
+      'showTherapy' : showT
+    });
+  }
+  Future addData() async
+  {
+    return await ptable.document(uid).updateData({
+      'uid' : uid,
+      'showTherapy' : false
+    }
+    );
   }
 }

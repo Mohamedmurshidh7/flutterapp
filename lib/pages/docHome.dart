@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'patList.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutterapp/models/patient.dart';
+import 'docdrawer.dart';
 class dhome extends StatefulWidget {
   @override
   _dhomeState createState() => _dhomeState();
@@ -32,9 +33,10 @@ class _dhomeState extends State<dhome> {
             )
           ],
         ),
+        drawer: Docdrawer(),
         body:PatList(),
 
       ),
-    );;
+    );
   }
 }

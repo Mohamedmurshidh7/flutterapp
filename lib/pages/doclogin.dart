@@ -88,7 +88,7 @@ class _LogformState extends State<Logform> {
                     }
                     Navigator.pushNamed(context, '/');*/
                     if(formkey.currentState.validate()) {
-                      dynamic result = await _auth.signInwithEmail(email, password);
+                      dynamic result = await _auth.signInwithEmailDoc(email, password);
                       if(result==null)
                         {
                           print('error');

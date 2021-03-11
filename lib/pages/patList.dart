@@ -23,8 +23,8 @@ class _PatListState extends State<PatList> {
     return ListView.builder(
         itemCount: pats.length,
         itemBuilder: (context,index)
-    {
-     return patTile(pat:pats[index]);
-    });
+        {
+         return patTile(pat:pats[index]);
+        });
   }
 }
