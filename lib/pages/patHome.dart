@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/sevices/auth.dart';
 import 'package:flutterapp/sevices/database.dart';
 import 'package:provider/provider.dart';
+import 'phone.dart';
 
 class pHome extends StatefulWidget {
   @override
@@ -47,8 +48,15 @@ class _pHomeState extends State<pHome> {
       if(showTherapy==true)
         {
           return Container(
-            padding: EdgeInsets.all(10.0),
-            child: Text('Your therapy is available'),
+            width: double.infinity,
+            color: Colors.black12,
+            padding: EdgeInsets.all(15.0),
+            child: FlatButton(onPressed: (){
+
+              Navigator.push(context, MaterialPageRoute(builder: (context) => phoneAuth()));
+            },
+                child: Text('Schiz Therapy',style: TextStyle(fontSize: 20.0))
+            ),
           );
         }
       else
@@ -62,6 +70,7 @@ class _pHomeState extends State<pHome> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
+        backgroundColor: Colors.green[500],
         actions: [
           FlatButton.icon(onPressed:() async {
           return await _auth.Signout();

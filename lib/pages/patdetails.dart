@@ -9,6 +9,62 @@ class Details extends StatelessWidget {
   Details({this.pat});
   @override
   Widget build(BuildContext context) {
+    showConfirm()
+    {
+      showModalBottomSheet(context: (context),
+          builder: (context) {
+        return Container(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+
+            children: [
+              Text('Give Access to ${pat.name}' , style:
+                TextStyle(
+                  fontSize: 25.0,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.bold
+                )
+                ,),
+              SizedBox(height: 10.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RaisedButton(onPressed:() async {
+                    dynamic result =await auth.UpdateDoc(pat.uid, true);
+                    if(result==null)
+                    {
+                      print('error');
+                    }
+                    Navigator.pushNamed(context, '/');
+                  },
+                  child: Text('OK',style:
+                      TextStyle(
+                      fontSize: 15.0,
+                      color: Colors.white,
+                  ),
+                  ),
+                    color: Colors.blue,
+                  ),
+                  SizedBox(width: 20.0),
+                  RaisedButton(onPressed:()=>Navigator.pop(context),
+                    child: Text('Cancel',style:
+                    TextStyle(
+                        fontSize: 15.0,
+                        color: Colors.black87,
+
+                    ),
+                    ),
+                    color: Colors.white24,
+                  ),
+
+                ],
+              ),
+            ],
+          ),
+        );
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Patient Details'),
@@ -38,23 +94,24 @@ class Details extends StatelessWidget {
                 ),),
                 SizedBox(height: 10.0),
                 RaisedButton(
-                  onPressed: () async{
-                    dynamic result =await auth.UpdateDoc(pat.uid, true);
+                  onPressed: ()=> showConfirm(),
+
+                    /*dynamic result =await auth.UpdateDoc(pat.uid, true);
                     if(result==null)
                     {
                       print('error');
-                    }
-                    Navigator.pushNamed(context, '/');
+                    }*/
+                    //Navigator.pushNamed(context, '/');
                     // Navigator.push(context,
                     //     MaterialPageRoute(
                     //     builder: (_) => dhome()
                     // ));
-                  },
+
                  child: Text('Give access',style: TextStyle(
                    fontSize: 20.0,
                  ),
                  ),
-                )
+                ),
 
               ],
             ),
