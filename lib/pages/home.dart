@@ -47,6 +47,7 @@ class _MyFormState extends State<MyForm> {
   String password='';
   String error='';
   String name = '';
+  String phoneNumber = '';
   final formKey = GlobalKey<FormState>();
   final Authservice _auth = Authservice();
   @override
@@ -116,7 +117,24 @@ class _MyFormState extends State<MyForm> {
 
               ),
               SizedBox(height: 20,),
+              TextFormField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
 
+                  labelText: 'Phone Number',
+                ),
+                onChanged: (val){
+                  setState(() => phoneNumber = val);
+                },
+                validator: (value) {
+                  if(value.isEmpty)
+                  {
+                    return "enter a valid Name";
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 20,),
                  Row(
                    mainAxisAlignment: MainAxisAlignment.center,
                    children: [
@@ -181,7 +199,7 @@ class _MyFormState extends State<MyForm> {
                 child: FlatButton(onPressed: () async {
                   if(formKey.currentState.validate())
                     {
-                      dynamic result = await _auth.Regwithemail(name,email,password);
+                      dynamic result = await _auth.Regwithemail(name,email,password,phoneNumber);
                       if(result==null)
                         {
                           print('error');

@@ -93,9 +93,13 @@ class Details extends StatelessWidget {
                   fontSize: 20.0,
                 ),),
                 SizedBox(height: 10.0),
+                Text('Mobile  : ${pat.phoneNumber}',style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20.0,
+                ),),
+                SizedBox(height: 10.0),
                 RaisedButton(
                   onPressed: ()=> showConfirm(),
-
                     /*dynamic result =await auth.UpdateDoc(pat.uid, true);
                     if(result==null)
                     {

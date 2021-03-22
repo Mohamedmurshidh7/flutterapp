@@ -4,5 +4,6 @@ class Patient
   String name;
   String email;
   String password;
-  Patient({this.uid,this.name,this.email,this.password});
+  String phoneNumber;
+  Patient({this.uid,this.name,this.email,this.password,this.phoneNumber});
 }

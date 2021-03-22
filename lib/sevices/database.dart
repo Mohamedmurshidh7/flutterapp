@@ -7,13 +7,14 @@ class DatabaseService
 
   DatabaseService({this.uid});
 
-  Future updateUser(String Name ,String email ,String pwd) async {
+  Future updateUser(String Name ,String email ,String pwd,String phoneNumber) async {
       return await  ptable.document(uid).setData({
         'uid':uid,
         'name':Name,
         'email' : email,
         'password' : pwd,
-        'showTherapy': false
+        'showTherapy': false,
+        'phoneNumber' : phoneNumber
       });
   }
   Future<QuerySnapshot> getDoc()
@@ -31,7 +32,8 @@ class DatabaseService
         uid: doc.data['uid']??'',
         name: doc.data['name']??'',
         email : doc.data['email']??'',
-        password : doc.data['password']??''
+        password : doc.data['password']??'',
+        phoneNumber : doc.data['phoneNumber']??''
       );
     }).toList();
   }
